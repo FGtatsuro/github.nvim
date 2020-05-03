@@ -11,8 +11,8 @@ Requirements
 The dependencies on other softwares/libraries for this project. 
 This software may work even if these requirements aren't met, but the behavior on that case can't be supported officially.
 
-- Neovim (>= 0.3.x)
-- Python (>= 3.7.x)
+- Neovim (>= 0.5.x)
+- Python (>= 3.8.x)
 
 Installation
 ------------
