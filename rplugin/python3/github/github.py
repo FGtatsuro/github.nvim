@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import pathlib
 import subprocess
 import webbrowser
 
@@ -20,9 +21,16 @@ class GithubHandler():
             text=True).stdout
         org, repo = repo.split(':')[1].strip().strip('.git').split('/')
         branch = 'master'
-        # ToDo: リポジトリ名と違う名前でcloneしている場合に対応する
-        path = self.nvim.command_output('echo expand("%:p")').split(repo)[1]
-        self.browser.open(f'{self.base}/{org}/{repo}/tree/{branch}/{path}')
+
+        # Root directory may have a different name from repository name.
+        root = subprocess.run(
+            'git rev-parse --show-toplevel'.split(),
+            capture_output=True,
+            text=True).stdout.strip()
+        root = pathlib.Path(root)
+        current = self.nvim.command_output('echo expand("%:p")').strip()
+        current = pathlib.Path(current)
+        self.browser.open(f'{self.base}/{org}/{repo}/tree/{branch}/{current.relative_to(root)}')
 
 # https://wiki.python.org/moin/Vim
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
