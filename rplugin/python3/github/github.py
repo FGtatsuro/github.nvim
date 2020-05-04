@@ -18,8 +18,8 @@ class GithubHandler():
         repo = subprocess.run(
             'git config --local --get remote.origin.url'.split(),
             capture_output=True,
-            text=True).stdout
-        org, repo = repo.split(':')[1].strip().strip('.git').split('/')
+            text=True).stdout.strip()
+        org, repo = repo.split(':')[1].strip('.git').split('/')
         branch = 'master'
 
         # Root directory may have a different name from repository name.
