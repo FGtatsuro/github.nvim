@@ -10,7 +10,6 @@ from github.github import GithubHandler
 class GithubPlugin():
 
     def __init__(self, nvim):
-        self.nvim = nvim
         self.handler = GithubHandler(nvim)
 
     @neovim.command('GithubWebOpen', range=True)
