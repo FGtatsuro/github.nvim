@@ -14,7 +14,7 @@ class GithubHandler():
         self.browser = webbrowser.get('macosx')
         self.base = 'https://github.com'
 
-    def open_github_webpage(self):
+    def open_github_webpage(self, _range):
         repo = subprocess.run(
             'git config --local --get remote.origin.url'.split(),
             capture_output=True,
@@ -33,7 +33,10 @@ class GithubHandler():
 
         url = f'{self.base}/{org}/{repo}/tree/{branch}/{current.relative_to(root)}'
         if current.is_file():
-            url = f'{url}#L{self.nvim.current.window.cursor[0]}'
+            if _range[0] == _range[1]:
+                url = f'{url}#L{_range[0]}'
+            else:
+                url = f'{url}#L{_range[0]}-L{_range[1]}'
         self.browser.open(url)
 
 # https://wiki.python.org/moin/Vim
