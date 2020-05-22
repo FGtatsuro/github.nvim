@@ -30,7 +30,11 @@ class GithubHandler():
         root = pathlib.Path(root)
         current = self.nvim.command_output('echo expand("%:p")').strip()
         current = pathlib.Path(current)
-        self.browser.open(f'{self.base}/{org}/{repo}/tree/{branch}/{current.relative_to(root)}')
+
+        url = f'{self.base}/{org}/{repo}/tree/{branch}/{current.relative_to(root)}'
+        if current.is_file():
+            url = f'{url}#L{self.nvim.current.window.cursor[0]}'
+        self.browser.open(url)
 
 # https://wiki.python.org/moin/Vim
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
