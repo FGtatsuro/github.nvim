@@ -19,7 +19,10 @@ class GithubHandler():
             'git config --local --get remote.origin.url'.split(),
             capture_output=True,
             text=True).stdout.strip()
-        org, repo = repo.split(':')[1].strip('.git').split('/')
+        repo = repo.split(':')[1]
+        if repo.endswith('.git'):
+            repo = repo[:-4]
+        org, repo = repo.split('/')
         branch = 'master'
 
         # Root directory may have a different name from repository name.
