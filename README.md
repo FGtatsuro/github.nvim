@@ -3,7 +3,7 @@ github.nvim
 
 [![Build Status](https://travis-ci.org/FGtatsuro/github.nvim.svg?branch=master)](https://travis-ci.org/FGtatsuro/github.nvim)
 
-Neovim plugin for Neovim plugin to provide utilities for Github.
+Neovim plugin to see a file on current buffer via Github WebUI.
 
 Requirements
 ------------
